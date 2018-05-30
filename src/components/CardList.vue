@@ -1,10 +1,14 @@
 <template>
-  <ul class="card-list">
-    <card-item v-for="(card, idx) of data" :key="idx"
-      :idx="idx"
-      :data="card"
-    />
-  </ul>
+  <div class="card-list">
+    <ul v-show="haveSomeCards" class="list">
+      <card-item v-for="(card, idx) of data" :key="idx"
+        :idx="idx"
+        :data="card"
+      />
+    </ul>
+
+    <p v-show="!haveSomeCards" class="no-cards-msg">No cards to show, feel free to add some</p>
+  </div>
 </template>
 
 
@@ -14,16 +18,26 @@ import CardItem from '@/components/CardItem'
 export default {
   components: { CardItem },
   props: ['data'],
+  computed: {
+    haveSomeCards () {
+      return !!(this.data && this.data.length)
+    }
+  }
 }
 </script>
 
 
 <style scoped>
-.card-list {
+.list {
   padding: 10px;
   margin: 0;
   list-style-type: none;
   display: flex;
   flex-wrap: wrap;
+}
+
+.no-cards-msg {
+  margin: 10px;
+  padding: 10px;
 }
 </style>
