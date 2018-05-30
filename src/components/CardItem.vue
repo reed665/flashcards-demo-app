@@ -1,6 +1,6 @@
 <template>
   <li class="card-item">
-    <button class="btn-remove" @click="$bus.emit('removeCard', { idx, card: data })">Remove</button>
+    <button class="btn-remove" @click="removeCard({ idx, card: data })">Remove</button>
 
     <p>Question: {{ data.question }}</p>
     <p>Answer: {{ data.answer }}</p>
@@ -11,6 +11,11 @@
 <script>
 export default {
   props: ['idx', 'data'],
+  methods: {
+    removeCard (cardData) {
+      this.$store.commit('removeCard', cardData)
+    }
+  }
 }
 </script>
 
