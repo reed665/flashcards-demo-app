@@ -24,6 +24,9 @@ const cards = [
     question: `Why use immutable data structures?`,
     answer: `To start with, it's the simplest type of data, and...`,
   }),
+  card(),
+  card(),
+  card(),
 ]
 
 export default {
