@@ -2,7 +2,7 @@
   <div class="home">
     <h2 class="title">Flashcards</h2>
     <!-- <img src="../assets/logo.png"> -->
-    <card-list :data="cards" @onRemove="removeCard" />
+    <card-list :data="cards" />
   </div>
 </template>
 
@@ -35,6 +35,9 @@ export default {
     return {
       cards,
     }
+  },
+  created () {
+    this.$bus.$on('removeCard', ({ idx, card }) => this.removeCard({ idx, card }))
   },
   methods: {
     removeCard ({ card, idx }) {
