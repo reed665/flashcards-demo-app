@@ -1,10 +1,7 @@
 <template>
   <div class="card-list">
     <ul v-show="haveSomeCards" class="list">
-      <card-item v-for="(card, idx) of data" :key="idx"
-        :idx="idx"
-        :data="card"
-      />
+      <card-item v-for="card of data" :key="card.id" :data="card" />
     </ul>
 
     <p v-show="!haveSomeCards" class="no-cards-msg">No cards to show, feel free to add some</p>
