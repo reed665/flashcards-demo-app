@@ -37,10 +37,10 @@ export default {
     }
   },
   created () {
-    this.$bus.$on('removeCard', this.removeCard)
+    this.$bus.on('removeCard', this.removeCard)
   },
   beforeDestroy () {
-    this.$bus.$off('removeCard', this.removeCard)
+    this.$bus.off('removeCard', this.removeCard)
   },
   methods: {
     removeCard ({ card, idx }) {

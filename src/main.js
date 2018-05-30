@@ -1,10 +1,10 @@
 import Vue from 'vue'
+import VueBus from 'vue-bus'
 import App from './App.vue'
 import router from './router'
 import store from './store'
 
-import bus from './bus'
-Vue.prototype.$bus = bus
+Vue.use(VueBus)
 
 Vue.config.productionTip = false
 
