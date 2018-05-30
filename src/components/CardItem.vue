@@ -1,5 +1,7 @@
 <template>
   <li class="card-item">
+    <button class="btn-remove" @click="$emit('onRemove', data)">Remove</button>
+
     <p>Question: {{ data.question }}</p>
     <p>Answer: {{ data.answer }}</p>
   </li>
@@ -18,5 +20,14 @@ export default {
     padding: 10px;
     margin: 10px;
     border: 1px solid grey;
+    position: relative;
+  }
+
+  .btn-remove {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 2px;
+    cursor: pointer;
   }
 </style>

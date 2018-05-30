@@ -2,7 +2,7 @@
   <div class="home">
     <h2 class="title">Flashcards</h2>
     <!-- <img src="../assets/logo.png"> -->
-    <card-list :data="cards" />
+    <card-list :data="cards" @onRemove="removeCard" />
   </div>
 </template>
 
@@ -34,6 +34,11 @@ export default {
   data () {
     return {
       cards,
+    }
+  },
+  methods: {
+    removeCard ({ card, idx }) {
+      this.cards = this.cards.filter((card, index) => index !== idx)
     }
   }
 }

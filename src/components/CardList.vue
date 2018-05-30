@@ -1,6 +1,9 @@
 <template>
   <ul class="card-list">
-    <card-item v-for="(card, idx) of data" :key="idx" :data="card"></card-item>
+    <card-item v-for="(card, idx) of data" :key="idx"
+      :data="card"
+      @onRemove="$emit('onRemove', { card: $event, idx })"
+    />
   </ul>
 </template>
 
