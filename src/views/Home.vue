@@ -37,7 +37,7 @@ export default {
     }
   },
   created () {
-    this.$bus.$on('removeCard', ({ idx, card }) => this.removeCard({ idx, card }))
+    this.$bus.$on('removeCard', this.removeCard)
   },
   methods: {
     removeCard ({ card, idx }) {
