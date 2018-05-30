@@ -39,6 +39,9 @@ export default {
   created () {
     this.$bus.$on('removeCard', this.removeCard)
   },
+  beforeDestroy () {
+    this.$bus.$off('removeCard', this.removeCard)
+  },
   methods: {
     removeCard ({ card, idx }) {
       this.cards = this.cards.filter((card, index) => index !== idx)
