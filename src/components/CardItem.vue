@@ -1,34 +1,36 @@
 <template>
-  <li class="card-item">
-    <template v-if="!data.editMode">
-      <div class="actions">
-        <i class="material-icons teal-text" @click="editModeOn">edit</i>
-        <i class="material-icons teal-text" @click="removeCard">delete</i>
+  <div class="col m12 l6 xl4">
+    <div class="card">
+      <div class="card-content" v-if="!data.editMode">
+        <div class="actions">
+          <i class="material-icons teal-text" @click="editModeOn">edit</i>
+          <i class="material-icons teal-text" @click="removeCard">delete</i>
+        </div>
+
+        <div class="card-title">Question: {{ data.question }}</div>
+        <p>Answer: {{ data.answer }}</p>
       </div>
 
-      <p>Question: {{ data.question }}</p>
-      <p>Answer: {{ data.answer }}</p>
-    </template>
+      <div class="card-content" v-else>
+        <form @submit.prevent="updateCard">
+          <label>
+            <div>Question</div>
+            <textarea name="question" v-model="question" class="materialize-textarea" placeholder="Type your question here"></textarea>
+          </label>
 
-    <template v-else>
-      <form @submit.prevent="updateCard">
-        <label>
-          <div>Question</div>
-          <textarea name="question" v-model="question" class="materialize-textarea" placeholder="Type your question here"></textarea>
-        </label>
+          <label>
+            <div>Answer</div>
+            <textarea name="answer" v-model="answer" class="materialize-textarea" placeholder="Type your answer here"></textarea>
+          </label>
 
-        <label>
-          <div>Answer</div>
-          <textarea name="answer" v-model="answer" class="materialize-textarea" placeholder="Type your answer here"></textarea>
-        </label>
-
-        <div class="form-action">
-          <button v-if="!data.newCard" type="button" class="btn-small btn-flat" @click="editModeOff">Cancel</button>
-          <button :disabled="!canSubmit" type="submit" class="btn-small">Submit</button>
-        </div>
-      </form>
-    </template>
-  </li>
+          <div class="form-action">
+            <button v-if="!data.newCard" type="button" class="btn-small btn-flat" @click="editModeOff">Cancel</button>
+            <button :disabled="!canSubmit" type="submit" class="btn-small">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </template>
 
 
@@ -84,14 +86,6 @@ export default {
 
 
 <style scoped>
-  .card-item {
-    padding: 10px;
-    margin: 10px;
-    border: 1px solid grey;
-    position: relative;
-    min-width: 250px;
-  }
-
   .actions {
     position: absolute;
     right: 0;

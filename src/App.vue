@@ -11,9 +11,6 @@
 
 <style>
 body {
-  font-family: sans-serif;
-  margin: 0;
-  background: lightgray;
   overflow-y: scroll;
 }
 </style>
