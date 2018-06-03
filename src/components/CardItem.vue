@@ -1,5 +1,5 @@
 <template>
-  <div class="col m12 l6 xl4">
+  <div class="col s12 l6 xl4">
     <div class="card">
       <div class="card-content" v-if="!data.editMode">
         <div class="actions">
