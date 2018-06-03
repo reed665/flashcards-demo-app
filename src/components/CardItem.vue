@@ -1,6 +1,6 @@
 <template>
   <li class="card-item">
-    <template v-if="!editMode">
+    <template v-if="!data.editMode">
       <div class="actions">
         <button class="btn" @click="editModeOn">Edit</button>
         <button class="btn" @click="removeCard">Remove</button>
@@ -37,7 +37,6 @@ export default {
   props: ['data'],
   data () {
     return {
-      editMode: false,
       question: '',
       answer: '',
     }
@@ -52,18 +51,20 @@ export default {
       this.answer = answer
     },
     editModeOn () {
-      this.editMode = true
+      const { id } = this.data
+      this.$store.commit('cards/update', { id, editMode: true })
     },
     editModeOff () {
-      this.editMode = false
+      const { id } = this.data
+      this.$store.commit('cards/update', { id, editMode: false })
       this.resetCardData()
     },
     updateCard () {
-      this.editMode = false
       const card = {
         ...this.data,
         question: this.question,
         answer: this.answer,
+        editMode: false,
       }
       this.$store.commit('cards/update', card)
     },
