@@ -1,8 +1,14 @@
 <template>
-  <div class="home">
-    <h2 class="title">Flashcards</h2>
-    <!-- <img src="../assets/logo.png"> -->
-    <button class="btn-add" @click="addCard">Add Flashcard</button>
+  <div class="home container">
+    <header>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="#" class="brand-logo">Flashcards</a>
+          <button class="btn-floating btn-large halfway-fab" @click="addCard"><i class="material-icons">add</i></button>
+        </div>
+      </nav>
+    </header>
+
     <CardList :data="cards" />
   </div>
 </template>
@@ -29,25 +35,25 @@ export default {
 
 <style scoped>
   .home {
-    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
     background: white;
   }
 
-  .title {
-    margin: 0;
-    padding: 20px;
-    border-bottom: 1px solid black;
+  nav {
+    padding-left: 20px;
+    padding-right: 20px;
   }
 
-  .btn-add {
-    padding: 4px;
-    margin: 10px 20px;
+  header {
+    position: relative;
+    margin-bottom: 40px;
   }
 
   @media (min-width: 1080px) {
     .home {
-      margin: 50px auto;
-      max-width: 960px;
+      margin-top: 40px;
+      margin-bottom: 40px;
     }
   }
 </style>

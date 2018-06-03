@@ -2,8 +2,8 @@
   <li class="card-item">
     <template v-if="!data.editMode">
       <div class="actions">
-        <button class="btn" @click="editModeOn">Edit</button>
-        <button class="btn" @click="removeCard">Remove</button>
+        <i class="material-icons" @click="editModeOn">edit</i>
+        <i class="material-icons" @click="removeCard">delete</i>
       </div>
 
       <p>Question: {{ data.question }}</p>
@@ -14,12 +14,12 @@
       <form @submit.prevent="updateCard">
         <label>
           <div>Question</div>
-          <textarea name="question" v-model="question" cols="30" rows="10" placeholder="Type your question here"></textarea>
+          <textarea name="question" v-model="question" class="materialize-textarea" placeholder="Type your question here"></textarea>
         </label>
 
         <label>
           <div>Answer</div>
-          <textarea name="answer" v-model="answer" cols="30" rows="10" placeholder="Type your answer here"></textarea>
+          <textarea name="answer" v-model="answer" class="materialize-textarea" placeholder="Type your answer here"></textarea>
         </label>
 
         <div class="form-action">
@@ -89,6 +89,7 @@ export default {
     margin: 10px;
     border: 1px solid grey;
     position: relative;
+    min-width: 250px;
   }
 
   .actions {
@@ -97,17 +98,12 @@ export default {
     top: 0;
   }
 
-  .btn {
-    padding: 2px;
-    cursor: pointer;
-  }
-
   .form-action {
     text-align: right;
     margin-top: 5px;
   }
 
-  form label {
-    display: block;
+  textarea {
+    min-height: 100px;
   }
 </style>
