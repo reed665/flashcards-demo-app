@@ -8,7 +8,7 @@
         </div>
 
         <div class="card-title">Question: {{ data.question }}</div>
-        <p>Answer: {{ data.answer }}</p>
+        <p v-if="data.showAnswer">Answer: {{ data.answer }}</p>
       </div>
 
       <div class="card-content" v-else>
@@ -28,6 +28,11 @@
             <button :disabled="!canSubmit" type="submit" class="btn-small">Submit</button>
           </div>
         </form>
+      </div>
+
+      <div class="card-action">
+        <a v-if="data.showAnswer" href="#" @click="toggleShowAnswer">Hide Answer</a>
+        <a v-else href="#" @click="toggleShowAnswer">Show Answer</a>
       </div>
     </div>
   </div>
@@ -66,6 +71,10 @@ export default {
       this.$store.commit('cards/update', { id, editMode: false })
       this.resetCardData()
     },
+    toggleShowAnswer () {
+      const { id } = this.data
+      this.$store.commit('cards/update', { id, showAnswer: !this.data.showAnswer })
+    },
     updateCard () {
       if (!this.canSubmit) return
       const card = {
@@ -87,6 +96,8 @@ export default {
 
 <style scoped>
   .actions {
+    opacity: 0;
+    transition: opacity .2s ease-out;
     position: absolute;
     right: 0;
     top: 0;
@@ -94,6 +105,10 @@ export default {
   .actions > i {
     cursor: pointer;
     margin: 2px;
+  }
+
+  .card:hover .actions {
+    opacity: 1;
   }
 
   .form-action {

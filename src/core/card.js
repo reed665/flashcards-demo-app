@@ -3,6 +3,7 @@ const defaultCard = {
   answer: 'This is answer',
   editMode: false,
   newCard: false,
+  showAnswer: false,
   rank: 0,
 }
 
