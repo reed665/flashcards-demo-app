@@ -2,6 +2,7 @@ const defaultCard = {
   question: 'This is question',
   answer: 'This is answer',
   editMode: false,
+  newCard: false,
   rank: 0,
 }
 

@@ -7,7 +7,7 @@ export default {
   },
   
   add (state, cardData) {
-    const cardToAdd = card(cardData)
+    const cardToAdd = card({ ...cardData, editMode: true })
     state.items.unshift(cardToAdd)
   },
 

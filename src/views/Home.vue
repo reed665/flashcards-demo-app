@@ -20,7 +20,7 @@ export default {
   },
   methods: {
     addCard () {
-      this.$store.commit('cards/add')
+      this.$store.commit('cards/add', { question: '', answer: '', newCard: true })
     }
   },
 }

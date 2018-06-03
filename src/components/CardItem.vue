@@ -23,8 +23,8 @@
         </label>
 
         <div class="form-action">
-          <button type="button" class="btn" @click="editModeOff">Cancel</button>
-          <button type="submit" class="btn">Submit</button>
+          <button v-if="!data.newCard" type="button" class="btn" @click="editModeOff">Cancel</button>
+          <button :disabled="!canSubmit" type="submit" class="btn">Submit</button>
         </div>
       </form>
     </template>
@@ -44,6 +44,11 @@ export default {
   created () {
     this.resetCardData()
   },
+  computed: {
+    canSubmit () {
+      return this.question && this.answer
+    }
+  },
   methods: {
     resetCardData () {
       const { question, answer } = this.data
@@ -60,11 +65,13 @@ export default {
       this.resetCardData()
     },
     updateCard () {
+      if (!this.canSubmit) return
       const card = {
         ...this.data,
         question: this.question,
         answer: this.answer,
         editMode: false,
+        newCard: false,
       }
       this.$store.commit('cards/update', card)
     },
