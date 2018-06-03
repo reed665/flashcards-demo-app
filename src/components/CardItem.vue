@@ -65,10 +65,10 @@ export default {
         question: this.question,
         answer: this.answer,
       }
-      this.$store.commit('updateCard', card)
+      this.$store.commit('cards/update', card)
     },
     removeCard () {
-      this.$store.commit('removeCard', this.data.id)
+      this.$store.commit('cards/remove', this.data.id)
     },
   }
 }

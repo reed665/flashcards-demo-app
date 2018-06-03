@@ -1,7 +1,7 @@
 import card from '@/core/card'
 
 export default {
-  cards: [
+  items: [
     card({
       question: 'What is a pure function?',
       answer: `It is a function that returns a value, based on it's input and causes no side effects`,

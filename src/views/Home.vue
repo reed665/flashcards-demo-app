@@ -3,7 +3,7 @@
     <h2 class="title">Flashcards</h2>
     <!-- <img src="../assets/logo.png"> -->
     <button class="btn-add" @click="addCard">Add Flashcard</button>
-    <card-list :data="cards" />
+    <CardList :data="cards" />
   </div>
 </template>
 
@@ -15,12 +15,12 @@ export default {
   components: { CardList },
   computed: {
     cards () {
-      return this.$store.state.cards
+      return this.$store.state.cards.items
     }
   },
   methods: {
     addCard () {
-      this.$store.commit('addCard')
+      this.$store.commit('cards/add')
     }
   },
 }
