@@ -14,8 +14,8 @@ export default {
       question: `Why use immutable data structures?`,
       answer: `To start with, it's the simplest type of data, and...`,
     }),
-    card(),
-    card(),
-    card(),
+    card({ rank: 10 }),
+    card({ rank: 10 }),
+    card({ rank: 10 }),
   ]
 }

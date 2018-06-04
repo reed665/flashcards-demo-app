@@ -29,7 +29,7 @@
       </form>
     </div>
 
-    <div class="card-action">
+    <div v-if="showCardAction" class="card-action">
       <template v-if="data.showAnswer">
         <a href="#" class="red-text" @click="doSelfGrade('bad')">Bad</a>
         <a href="#" class="blue-text" @click="doSelfGrade('good')">Good</a>
@@ -57,7 +57,11 @@ export default {
   computed: {
     canSubmit () {
       return this.question && this.answer
-    }
+    },
+    showCardAction () {
+      const { newCard, editMode } = this.data
+      return !newCard && !editMode
+    },
   },
   methods: {
     resetCardData () {

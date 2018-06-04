@@ -37,7 +37,7 @@ export default {
   header {
     padding: 10px;
   }
-  
+
   .home {
     margin-top: 20px;
     margin-bottom: 20px;
@@ -51,7 +51,6 @@ export default {
 
   header {
     position: relative;
-    margin-bottom: 40px;
   }
 
   @media (min-width: 1080px) {

@@ -1,18 +1,34 @@
 <template>
   <div class="card-list">
-    <div v-show="haveSomeCards" class="card-list-content">
-      <div v-for="card of orderedByRank" :key="card.id" class="card-holder">
-        <CardItem :data="card" />
-      </div>
-    </div>
+    <template v-show="haveSomeCards">
+      <template v-if="newCards.length">
+        <h3 class="card-list-title">New</h3>
+        <div class="card-list-content">
+          <div v-for="card of newCards" :key="card.id" class="card-holder">
+            <CardItem :data="card" />
+          </div>
+        </div>
+      </template>
+      
+      <template v-if="masteredCards.length">
+        <h3 class="card-list-title">Mastered</h3>
+        <div class="card-list-content">
+          <div v-for="card of masteredCards" :key="card.id" class="card-holder">
+            <CardItem :data="card" />
+          </div>
+        </div>
+      </template>
+    </template>
 
-    <p v-show="!haveSomeCards" class="no-cards-msg">No cards to show, feel free to add some</p>
+    <p v-show="!haveSomeCards" class="blue-grey-text no-cards-msg">No cards to show, feel free to add some</p>
   </div>
 </template>
 
 
 <script>
 import CardItem from '@/components/CardItem'
+
+const rankThreshold = 5
 
 export default {
   components: { CardItem },
@@ -24,6 +40,12 @@ export default {
     orderedByRank () {
       return this.data.slice().sort((prev, next) => prev.rank - next.rank)
     },
+    newCards () {
+      return this.orderedByRank.filter(card => card.rank <= rankThreshold)
+    },
+    masteredCards () {
+      return this.orderedByRank.filter(card => card.rank > rankThreshold)
+    },
   },
 }
 </script>
@@ -31,6 +53,11 @@ export default {
 
 <style scoped>
 .no-cards-msg {
+  margin: 20px 10px 10px;
+  font-size: 1.2em;
+}
+
+.card-list-title {
   margin: 10px;
 }
 
