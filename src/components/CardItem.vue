@@ -31,9 +31,9 @@
 
     <div class="card-action">
       <template v-if="data.showAnswer">
-        <a href="#" @click="doSelfGrade('bad')">Bad</a>
-        <a href="#" @click="doSelfGrade('good')">Good</a>
-        <a href="#" @click="doSelfGrade('great')">Great</a>
+        <a href="#" class="red-text" @click="doSelfGrade('bad')">Bad</a>
+        <a href="#" class="blue-text" @click="doSelfGrade('good')">Good</a>
+        <a href="#" class="green-text" @click="doSelfGrade('great')">Great</a>
       </template>
 
       <a v-else href="#" @click="showAnswer">Show Answer</a>
