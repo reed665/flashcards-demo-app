@@ -31,8 +31,13 @@
       </div>
 
       <div class="card-action">
-        <a v-if="data.showAnswer" href="#" @click="toggleShowAnswer">Hide Answer</a>
-        <a v-else href="#" @click="toggleShowAnswer">Show Answer</a>
+        <template v-if="data.showAnswer">
+          <a href="#" @click="doSelfGrade('bad')">Bad</a>
+          <a href="#" @click="doSelfGrade('good')">Good</a>
+          <a href="#" @click="doSelfGrade('great')">Great</a>
+        </template>
+
+        <a v-else href="#" @click="showAnswer">Show Answer</a>
       </div>
     </div>
   </div>
@@ -71,9 +76,13 @@ export default {
       this.$store.commit('cards/update', { id, editMode: false })
       this.resetCardData()
     },
-    toggleShowAnswer () {
+    showAnswer () {
       const { id } = this.data
-      this.$store.commit('cards/update', { id, showAnswer: !this.data.showAnswer })
+      this.$store.commit('cards/update', { id, showAnswer: true })
+    },
+    doSelfGrade (selfGrade) {
+      const { id: cardId } = this.data
+      this.$store.commit('cards/grade', { cardId, selfGrade })
     },
     updateCard () {
       if (!this.canSubmit) return
