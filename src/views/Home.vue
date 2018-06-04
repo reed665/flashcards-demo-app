@@ -4,7 +4,7 @@
       <nav>
         <div class="nav-wrapper">
           <a href="#" class="brand-logo">Flashcards</a>
-          <button class="btn-floating btn-large halfway-fab" @click="addCard"><i class="material-icons">add</i></button>
+          <button class="btn-floating btn-large halfway-fab" @click="newCard"><i class="material-icons">add</i></button>
         </div>
       </nav>
     </header>
@@ -25,9 +25,13 @@ export default {
     }
   },
   methods: {
-    addCard () {
-      this.$store.commit('cards/add', { question: '', answer: '', newCard: true })
-    }
+    newCard () {
+      const cardData = { question: '', answer: '', newCard: true, editMode: true }
+      this.$store.dispatch('cards/add', cardData)
+    },
+  },
+  created () {
+    this.$store.dispatch('cards/load')
   },
 }
 </script>

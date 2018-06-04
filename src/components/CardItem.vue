@@ -43,6 +43,8 @@
 
 
 <script>
+import { gradeToRank } from '@/core/card'
+
 export default {
   props: ['data'],
   data () {
@@ -71,20 +73,21 @@ export default {
     },
     editModeOn () {
       const { id } = this.data
-      this.$store.commit('cards/update', { id, editMode: true })
+      this.$store.dispatch('cards/update', { id, editMode: true })
     },
     editModeOff () {
       const { id } = this.data
-      this.$store.commit('cards/update', { id, editMode: false })
+      this.$store.dispatch('cards/update', { id, editMode: false })
       this.resetCardData()
     },
     showAnswer () {
       const { id } = this.data
-      this.$store.commit('cards/update', { id, showAnswer: true })
+      this.$store.dispatch('cards/update', { id, showAnswer: true })
     },
     doSelfGrade (selfGrade) {
-      const { id: cardId } = this.data
-      this.$store.commit('cards/grade', { cardId, selfGrade })
+      const { id } = this.data
+      const rank = gradeToRank(selfGrade, this.data.rank)
+      this.$store.dispatch('cards/update', { id, rank, showAnswer: false })
     },
     updateCard () {
       if (!this.canSubmit) return
@@ -95,10 +98,10 @@ export default {
         editMode: false,
         newCard: false,
       }
-      this.$store.commit('cards/update', card)
+      this.$store.dispatch('cards/update', card)
     },
     removeCard () {
-      this.$store.commit('cards/remove', this.data.id)
+      this.$store.dispatch('cards/remove', this.data.id)
     },
   }
 }
