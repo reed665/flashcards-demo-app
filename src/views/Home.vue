@@ -34,6 +34,10 @@ export default {
 
 
 <style scoped>
+  header {
+    padding: 10px;
+  }
+  
   .home {
     margin-top: 20px;
     margin-bottom: 20px;
