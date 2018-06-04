@@ -1,7 +1,7 @@
 <template>
   <div class="card-list">
     <div v-show="haveSomeCards" class="row">
-      <CardItem v-for="card of data" :key="card.id" :data="card" />
+      <CardItem v-for="card of orderedByRank" :key="card.id" :data="card" />
     </div>
 
     <p v-show="!haveSomeCards" class="no-cards-msg">No cards to show, feel free to add some</p>
@@ -18,7 +18,10 @@ export default {
   computed: {
     haveSomeCards () {
       return !!(this.data && this.data.length)
-    }
+    },
+    orderedByRank () {
+      return this.data.slice().sort((prev, next) => prev.rank - next.rank)
+    },
   },
 }
 </script>
