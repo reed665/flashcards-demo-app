@@ -1,3 +1,5 @@
+import card from '@/core/card'
+
 export default {
   load (state, cards) {
     state.items = cards
@@ -7,6 +9,11 @@ export default {
     state.items = state.items.filter(item => {
       return item.id !== id
     })
+  },
+
+  new (state, cardData) {
+    const newCard = card(cardData)
+    state.items.unshift(newCard)
   },
   
   add (state, card) {

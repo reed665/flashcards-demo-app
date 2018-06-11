@@ -7,11 +7,14 @@ const defaultCard = {
   rank: 0,
 }
 
+let nextNewCardId = 1
+
 export default function card (data = {}) {
-  return {
+  const newCard = {
     ...defaultCard,
     ...data,
   }
+  return data.newCard ? { ...newCard, id: nextNewCardId++ } : newCard
 }
 
 export const fakeCards = [

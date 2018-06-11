@@ -14,7 +14,7 @@ export default {
         commit('load', cards)
       })
       .catch(err => {
-        console.error('Error getting documents', error)
+        console.error('Error getting documents', err)
       })
   },
 
@@ -24,11 +24,13 @@ export default {
         commit('remove', id)
       })
       .catch(err => {
-        console.error('Error deleting document', error)
+        console.error('Error deleting document', err)
       })
   },
 
-  add ({ commit }, cardData) {
+  add ({ commit }, cardDataRaw) {
+    const { id, ...cardData } = cardDataRaw
+    commit('remove', id)
     const cardToAdd = card(cardData)
     return ref.add(cardToAdd)
       .then(docRef => {
@@ -36,7 +38,7 @@ export default {
         commit('add', { id, ...cardToAdd })
       })
       .catch(err => {
-        console.error('Error adding document', error)
+        console.error('Error adding document', err)
       })
   },
 
@@ -47,7 +49,7 @@ export default {
         commit('update', card)
       })
       .catch(err => {
-        console.error('Error updating document', error)
+        console.error('Error updating document', err)
       })
   },
 }

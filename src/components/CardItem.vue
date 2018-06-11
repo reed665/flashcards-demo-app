@@ -23,7 +23,7 @@
         </label>
 
         <div class="form-action">
-          <button v-if="!data.newCard" type="button" class="btn-small btn-flat" @click="editModeOff">Cancel</button>
+          <button type="button" class="btn-small btn-flat" @click="editModeOff">Cancel</button>
           <button :disabled="!canSubmit" type="submit" class="btn-small">Submit</button>
         </div>
       </form>
@@ -76,7 +76,11 @@ export default {
       this.$store.dispatch('cards/update', { id, editMode: true })
     },
     editModeOff () {
-      const { id } = this.data
+      const { id, newCard } = this.data
+      if (newCard) {
+        this.$store.commit('cards/remove', id)
+        return
+      }
       this.$store.dispatch('cards/update', { id, editMode: false })
       this.resetCardData()
     },
@@ -97,6 +101,10 @@ export default {
         answer: this.answer,
         editMode: false,
         newCard: false,
+      }
+      if (this.data.newCard) {
+        this.$store.dispatch('cards/add', card)
+        return
       }
       this.$store.dispatch('cards/update', card)
     },

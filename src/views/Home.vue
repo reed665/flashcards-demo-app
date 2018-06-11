@@ -32,7 +32,7 @@ export default {
   methods: {
     newCard () {
       const cardData = { question: '', answer: '', newCard: true, editMode: true }
-      this.$store.dispatch('cards/add', cardData)
+      this.$store.commit('cards/new', cardData)
     },
   },
   created () {
