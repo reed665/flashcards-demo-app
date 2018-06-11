@@ -3,8 +3,7 @@
   "version": "0.1.0",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "firebase:hosting": "npm run build && firebase deploy --only hosting"
+    "build": "vue-cli-service build"
   },
   "dependencies": {
     "firebase": "^5.0.4",
