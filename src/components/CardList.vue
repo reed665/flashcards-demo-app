@@ -1,6 +1,6 @@
 <template>
   <div class="card-list">
-    <template v-show="haveSomeCards">
+    <template v-show="haveSomeCards && !loading">
       <template v-if="newCards.length">
         <h3 class="card-list-title">New</h3>
         <div class="card-list-content">
@@ -20,7 +20,9 @@
       </template>
     </template>
 
-    <p v-show="!haveSomeCards" class="blue-grey-text no-cards-msg">No cards to show, feel free to add some</p>
+    <p v-show="!haveSomeCards && !loading" class="blue-grey-text no-cards-msg">No cards to show, feel free to add some</p>
+
+    <p v-show="loading" class="loading-msg">Loading...</p>
   </div>
 </template>
 
@@ -32,7 +34,7 @@ const rankThreshold = 5
 
 export default {
   components: { CardItem },
-  props: ['data'],
+  props: ['data', 'loading'],
   computed: {
     haveSomeCards () {
       return !!(this.data && this.data.length)
@@ -52,6 +54,11 @@ export default {
 
 
 <style scoped>
+.loading-msg {
+  margin: 20px 10px 10px;
+  font-size: 1.2em;
+}
+
 .no-cards-msg {
   margin: 20px 10px 10px;
   font-size: 1.2em;

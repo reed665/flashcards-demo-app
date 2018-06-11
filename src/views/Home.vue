@@ -9,7 +9,7 @@
       </nav>
     </header>
 
-    <CardList :data="cards" />
+    <CardList :data="cards" :loading="loading" />
   </div>
 </template>
 
@@ -19,6 +19,11 @@ import CardList from '@/components/CardList.vue'
 
 export default {
   components: { CardList },
+  data () {
+    return {
+      loading: false,
+    }
+  },
   computed: {
     cards () {
       return this.$store.state.cards.items
@@ -31,7 +36,11 @@ export default {
     },
   },
   created () {
+    this.loading = true
     this.$store.dispatch('cards/load')
+      .then(() => {
+        this.loading = false
+      })
   },
 }
 </script>
