@@ -9,7 +9,7 @@
           </div>
         </div>
       </template>
-      
+
       <template v-if="masteredCards.length">
         <h3 class="card-list-title">Mastered</h3>
         <div class="card-list-content">
@@ -28,28 +28,30 @@
 
 
 <script>
-import CardItem from '@/components/CardItem'
+import CardItem from './CardItem.vue';
 
-const rankThreshold = 5
+const rankThreshold = 5;
 
 export default {
-  components: { CardItem },
+  components: {
+    CardItem,
+  },
   props: ['data', 'loading'],
   computed: {
-    haveSomeCards () {
-      return !!(this.data && this.data.length)
+    haveSomeCards() {
+      return !!(this.data && this.data.length);
     },
-    orderedByRank () {
-      return this.data.slice().sort((prev, next) => prev.rank - next.rank)
+    orderedByRank() {
+      return this.data.slice().sort((prev, next) => prev.rank - next.rank);
     },
-    newCards () {
-      return this.orderedByRank.filter(card => card.rank <= rankThreshold)
+    newCards() {
+      return this.orderedByRank.filter(card => card.rank <= rankThreshold);
     },
-    masteredCards () {
-      return this.orderedByRank.filter(card => card.rank > rankThreshold)
+    masteredCards() {
+      return this.orderedByRank.filter(card => card.rank > rankThreshold);
     },
   },
-}
+};
 </script>
 
 

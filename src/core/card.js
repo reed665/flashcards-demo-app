@@ -5,42 +5,44 @@ const defaultCard = {
   newCard: false,
   showAnswer: false,
   rank: 0,
-}
+};
 
-let nextNewCardId = 1
+let nextNewCardId = 1;
 
-export default function card (data = {}) {
+export default function card(data = {}) {
   const newCard = {
     ...defaultCard,
     ...data,
-  }
-  return data.newCard ? { ...newCard, id: nextNewCardId++ } : newCard
+  };
+  return data.newCard ? { ...newCard, id: nextNewCardId++ } : newCard;
 }
 
 export const fakeCards = [
   card({
     question: 'What is a pure function?',
-    answer: `It is a function that returns a value, based on it's input and causes no side effects`,
+    answer: 'It is a function that returns a value, based on it\'s input and causes no side effects',
   }),
   card({
     question: 'What is partial application?',
-    answer: `Providing a function with fewer arguments than it takes, what's returned is a new function that takes the remaining parameters.`,
+    answer: 'Providing a function with fewer arguments than it takes, what\'s returned is a new function that takes the remaining parameters.',
   }),
   card({
-    question: `Why use immutable data structures?`,
-    answer: `To start with, it's the simplest type of data, and...`,
+    question: 'Why use immutable data structures?',
+    answer: 'To start with, it\'s the simplest type of data, and...',
   }),
   card({ rank: 10 }),
   card({ rank: 10 }),
   card({ rank: 10 }),
-]
+];
 
 export const gradeToRank = (grade, prevRank) => {
   switch (grade) {
-    case 'bad': return 0
-    case 'good': return prevRank + 1
-    case 'great': return prevRank + 2
+    case 'bad': return 0;
+    case 'good': return prevRank + 1;
+    case 'great': return prevRank + 2;
+    default: {
+      console.error('gradeToRank: unknown grade');
+      return grade;
+    }
   }
-  console.error('gradeToRank: unknown grade')
-  return grade
-}
+};

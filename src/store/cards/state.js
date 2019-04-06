@@ -1,5 +1,5 @@
-import card from '@/core/card'
+import card from '@/core/card';
 
 export default {
   items: [],
-}
+};

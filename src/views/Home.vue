@@ -15,34 +15,36 @@
 
 
 <script>
-import CardList from '@/components/CardList.vue'
+import CardList from '@/components/CardList.vue';
 
 export default {
   components: { CardList },
-  data () {
+  data() {
     return {
       loading: false,
-    }
+    };
   },
   computed: {
-    cards () {
-      return this.$store.state.cards.items
-    }
-  },
-  methods: {
-    newCard () {
-      const cardData = { question: '', answer: '', newCard: true, editMode: true }
-      this.$store.commit('cards/new', cardData)
+    cards() {
+      return this.$store.state.cards.items;
     },
   },
-  created () {
-    this.loading = true
+  methods: {
+    newCard() {
+      const cardData = {
+        question: '', answer: '', newCard: true, editMode: true,
+      };
+      this.$store.commit('cards/new', cardData);
+    },
+  },
+  created() {
+    this.loading = true;
     this.$store.dispatch('cards/load')
       .then(() => {
-        this.loading = false
-      })
+        this.loading = false;
+      });
   },
-}
+};
 </script>
 
 

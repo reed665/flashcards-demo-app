@@ -43,109 +43,109 @@
 
 
 <script>
-import { gradeToRank } from '@/core/card'
+import { gradeToRank } from '@/core/card';
 
 export default {
   props: ['data'],
-  data () {
+  data() {
     return {
       question: '',
       answer: '',
-    }
+    };
   },
-  created () {
-    this.resetCardData()
+  created() {
+    this.resetCardData();
   },
   computed: {
-    canSubmit () {
-      return this.question && this.answer
+    canSubmit() {
+      return this.question && this.answer;
     },
-    showCardAction () {
-      const { newCard, editMode } = this.data
-      return !newCard && !editMode
+    showCardAction() {
+      const { newCard, editMode } = this.data;
+      return !newCard && !editMode;
     },
   },
   methods: {
-    resetCardData () {
-      const { question, answer } = this.data
-      this.question = question
-      this.answer = answer
+    resetCardData() {
+      const { question, answer } = this.data;
+      this.question = question;
+      this.answer = answer;
     },
-    editModeOn () {
-      const { id } = this.data
-      this.$store.dispatch('cards/update', { id, editMode: true })
+    editModeOn() {
+      const { id } = this.data;
+      this.$store.dispatch('cards/update', { id, editMode: true });
     },
-    editModeOff () {
-      const { id, newCard } = this.data
+    editModeOff() {
+      const { id, newCard } = this.data;
       if (newCard) {
-        this.$store.commit('cards/remove', id)
-        return
+        this.$store.commit('cards/remove', id);
+        return;
       }
-      this.$store.dispatch('cards/update', { id, editMode: false })
-      this.resetCardData()
+      this.$store.dispatch('cards/update', { id, editMode: false });
+      this.resetCardData();
     },
-    showAnswer () {
-      const { id } = this.data
-      this.$store.dispatch('cards/update', { id, showAnswer: true })
+    showAnswer() {
+      const { id } = this.data;
+      this.$store.dispatch('cards/update', { id, showAnswer: true });
     },
-    doSelfGrade (selfGrade) {
-      const { id } = this.data
-      const rank = gradeToRank(selfGrade, this.data.rank)
-      this.$store.dispatch('cards/update', { id, rank, showAnswer: false })
+    doSelfGrade(selfGrade) {
+      const { id } = this.data;
+      const rank = gradeToRank(selfGrade, this.data.rank);
+      this.$store.dispatch('cards/update', { id, rank, showAnswer: false });
     },
-    updateCard () {
-      if (!this.canSubmit) return
+    updateCard() {
+      if (!this.canSubmit) return;
       const card = {
         ...this.data,
         question: this.question,
         answer: this.answer,
         editMode: false,
         newCard: false,
-      }
+      };
       if (this.data.newCard) {
-        this.$store.dispatch('cards/add', card)
-        return
+        this.$store.dispatch('cards/add', card);
+        return;
       }
-      this.$store.dispatch('cards/update', card)
+      this.$store.dispatch('cards/update', card);
     },
-    removeCard () {
-      this.$store.dispatch('cards/remove', this.data.id)
+    removeCard() {
+      this.$store.dispatch('cards/remove', this.data.id);
     },
-  }
-}
+  },
+};
 </script>
 
 
 <style scoped>
-  .card {
-    margin: 0;
-  }
+.card {
+  margin: 0;
+}
 
-  .actions {
-    opacity: 0;
-    transition: opacity .2s ease-out;
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
-  .actions > i {
-    cursor: pointer;
-    margin: 2px;
-  }
+.actions {
+  opacity: 0;
+  transition: opacity .2s ease-out;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.actions > i {
+  cursor: pointer;
+  margin: 2px;
+}
 
-  .card:hover .actions {
-    opacity: 1;
-  }
+.card:hover .actions {
+  opacity: 1;
+}
 
-  .form-action {
-    text-align: right;
-    margin-top: 5px;
-  }
-  .form-action button {
-    margin-left: 5px;
-  }
+.form-action {
+  text-align: right;
+  margin-top: 5px;
+}
+.form-action button {
+  margin-left: 5px;
+}
 
-  textarea {
-    min-height: 100px;
-  }
+textarea {
+  min-height: 100px;
+}
 </style>
