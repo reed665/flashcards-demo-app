@@ -1,42 +1,99 @@
 <template>
   <div class="card">
-    <div class="card-content" v-if="!data.editMode">
+    <div
+      v-if="!data.editMode"
+      class="card-content"
+    >
       <div class="actions">
-        <i class="material-icons teal-text" @click="editModeOn">edit</i>
-        <i class="material-icons teal-text" @click="removeCard">delete</i>
+        <i
+          class="material-icons teal-text"
+          @click="editModeOn"
+        >edit</i>
+        <i
+          class="material-icons teal-text"
+          @click="removeCard"
+        >delete</i>
       </div>
 
-      <div class="card-title">Question: {{ data.question }}</div>
-      <p v-if="data.showAnswer">Answer: {{ data.answer }}</p>
+      <div class="card-title">
+        Question: {{ data.question }}
+      </div>
+      <p v-if="data.showAnswer">
+        Answer: {{ data.answer }}
+      </p>
     </div>
 
-    <div class="card-content" v-else>
+    <div
+      v-else
+      class="card-content"
+    >
       <form @submit.prevent="updateCard">
         <label>
           <div>Question</div>
-          <textarea name="question" v-model="question" class="materialize-textarea" placeholder="Type your question here"></textarea>
+          <textarea
+            v-model="question"
+            name="question"
+            class="materialize-textarea"
+            placeholder="Type your question here"
+          />
         </label>
 
         <label>
           <div>Answer</div>
-          <textarea name="answer" v-model="answer" class="materialize-textarea" placeholder="Type your answer here"></textarea>
+          <textarea
+            v-model="answer"
+            name="answer"
+            class="materialize-textarea"
+            placeholder="Type your answer here"
+          />
         </label>
 
         <div class="form-action">
-          <button type="button" class="btn-small btn-flat" @click="editModeOff">Cancel</button>
-          <button :disabled="!canSubmit" type="submit" class="btn-small">Submit</button>
+          <button
+            type="button"
+            class="btn-small btn-flat"
+            @click="editModeOff"
+          >
+            Cancel
+          </button>
+          <button
+            :disabled="!canSubmit"
+            type="submit"
+            class="btn-small"
+          >
+            Submit
+          </button>
         </div>
       </form>
     </div>
 
-    <div v-if="showCardAction" class="card-action">
+    <div
+      v-if="showCardAction"
+      class="card-action"
+    >
       <template v-if="data.showAnswer">
-        <a href="#" class="red-text" @click="doSelfGrade('bad')">Bad</a>
-        <a href="#" class="blue-text" @click="doSelfGrade('good')">Good</a>
-        <a href="#" class="green-text" @click="doSelfGrade('great')">Great</a>
+        <a
+          href="#"
+          class="red-text"
+          @click="doSelfGrade('bad')"
+        >Bad</a>
+        <a
+          href="#"
+          class="blue-text"
+          @click="doSelfGrade('good')"
+        >Good</a>
+        <a
+          href="#"
+          class="green-text"
+          @click="doSelfGrade('great')"
+        >Great</a>
       </template>
 
-      <a v-else href="#" @click="showAnswer">Show Answer</a>
+      <a
+        v-else
+        href="#"
+        @click="showAnswer"
+      >Show Answer</a>
     </div>
   </div>
 </template>
@@ -46,15 +103,17 @@
 import { gradeToRank } from '@/core/card';
 
 export default {
-  props: ['data'],
+  props: {
+    data: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
     return {
       question: '',
       answer: '',
     };
-  },
-  created() {
-    this.resetCardData();
   },
   computed: {
     canSubmit() {
@@ -64,6 +123,9 @@ export default {
       const { newCard, editMode } = this.data;
       return !newCard && !editMode;
     },
+  },
+  created() {
+    this.resetCardData();
   },
   methods: {
     resetCardData() {

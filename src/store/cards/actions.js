@@ -41,11 +41,11 @@ export default {
       });
   },
 
-  update({ commit }, card) {
-    const { id, ...update } = card;
+  update({ commit }, cardToUpdate) {
+    const { id, ...update } = cardToUpdate;
     return ref.doc(id).update(update)
       .then(() => {
-        commit('update', card);
+        commit('update', cardToUpdate);
       })
       .catch((err) => {
         console.error('Error updating document', err);

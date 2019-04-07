@@ -14,14 +14,14 @@ export default {
     state.items.unshift(newCard);
   },
 
-  add(state, card) {
-    state.items.push(card);
+  add(state, cardToAdd) {
+    state.items.push(cardToAdd);
   },
 
-  update(state, card) {
+  update(state, cardToUpdate) {
     state.items = state.items.map((item) => {
-      if (item.id !== card.id) return item;
-      return { ...item, ...card };
+      if (item.id !== cardToUpdate.id) return item;
+      return { ...item, ...cardToUpdate };
     });
   },
 };

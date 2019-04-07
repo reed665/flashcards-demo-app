@@ -14,7 +14,10 @@ export default function card(data = {}) {
     ...defaultCard,
     ...data,
   };
-  return data.newCard ? { ...newCard, id: nextNewCardId++ } : newCard;
+  return data.newCard
+    // eslint-disable-next-line no-plusplus
+    ? { ...newCard, id: nextNewCardId++ }
+    : newCard;
 }
 
 export const fakeCards = [
